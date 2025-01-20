@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vehicle Brands - Ekadanta Auto Consultancy</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      /* Base styles */
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(to right, #e3f2fd, #bbdefb);
+      }
+
+      /* Navbar */
+      .navbar {
+        background: linear-gradient(to right, #9b59b6, #f06292);
+        padding: 1rem;
+      }
+
+      .navbar-container {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar-brand {
+        color: white;
+        font-size: 1.25rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .navbar-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+
+      .navbar-menu {
+        display: flex;
+        gap: 1.5rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        transition: color 200ms;
+      }
+
+      .nav-link:hover {
+        color: #e1bee7;
+      }
+
+      /* Container */
+      .container {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      /* Heading */
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        background: linear-gradient(to right, #9b59b6, #f06292, #ff4081);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Brand grid */
+      .brand-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      /* Card styles */
+      .brand-card {
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 300ms;
+      }
+
+      .brand-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .brand-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 1rem;
+      }
+
+      /* Button styles */
+      .brand-button {
+        display: inline-block;
+        background-color: #1976d2;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 300ms;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .brand-button:hover {
+        background-color: #004ba0;
+        transform: scale(1.05);
+      }
+
+      /* Empty state */
+      .empty-state {
+        text-align: center;
+        color: #4a5568;
+        font-size: 1.125rem;
+        margin-top: 3rem;
+      }
+
+      /* Footer */
+      .footer {
+        background: linear-gradient(to right, #9b59b6, #f06292);
+        color: white;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .footer p {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 768px) {
+        .navbar-toggle {
+          display: block;
+        }
+
+        .navbar-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to right, #9b59b6, #f06292);
+          padding: 1rem;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .navbar-menu.active {
+          display: flex;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .brand-grid {
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .brand-grid {
+          grid-template-columns: 1fr;
+          max-width: 300px;
+        }
+
+        .brand-card {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="#" class="navbar-brand">Ekadanta Auto Consultancy</a>
+        <button class="navbar-toggle" onclick="toggleMenu()">
+          <i data-lucide="menu"></i>
+        </button>
+        <ul class="navbar-menu" id="navMenu">
+          <li><a href="#" class="nav-link">Home</a></li>
+          <li><a href="#" class="nav-link">About</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>Explore Vehicle Brands</h1>
+
+      <div class="brand-grid">
+        {% for brand in brands %}
+        <div class="brand-card">
+          <h2 class="brand-name">{{ brand }}</h2>
+          <a href="{% url 'listing' brand=brand %}" class="brand-button">
+            View {{ brand }} Vehicles
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+
+      {% if brands|length == 0 %}
+      <p class="empty-state">No brands available at the moment.</p>
+      {% endif %}
+    </div>
+
+    <footer class="footer">
+      <p>&copy; {{ year }} Ekadanta Auto Consultancy. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // Mobile menu toggle
+      function toggleMenu() {
+        const menu = document.getElementById('navMenu');
+        menu.classList.toggle('active');
+      }
+    </script>
+  </body>
+</html>

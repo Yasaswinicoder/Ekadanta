@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contact Us - Ekdanta Auto Consultancy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: rgb(31, 41, 55);
+                padding: 1rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active a {
+                padding: 0.75rem 1rem;
+                width: 100%;
+                text-align: left;
+            }
+        }
+
+        .map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1.5rem auto;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 640px) {
+            .text-3xl { font-size: 1.875rem; }
+            .text-2xl { font-size: 1.5rem; }
+            .text-xl { font-size: 1.25rem; }
+        }
+
+        footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="bg-gray-800 text-white p-4 relative">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <a class="text-2xl font-bold" href="{% url 'home' %}">Ekdanta Auto Consultancy</a>
+                
+                <button class="mobile-menu md:hidden p-2 hover:bg-gray-700 rounded" onclick="toggleMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <div class="nav-links md:flex md:items-center md:space-x-4">
+                    <a class="block md:inline-block hover:text-gray-300 transition-colors" href="{% url 'home' %}">Home</a>
+                    <a class="block md:inline-block hover:text-gray-300 transition-colors" href="{% url 'vehicles' %}">Vehicles</a>
+                    <a class="block md:inline-block hover:text-gray-300 transition-colors" href="{% url 'contact' %}">Contact Us</a>
+                    <a class="block md:inline-block hover:text-gray-300 transition-colors" href="{% url 'about' %}">About Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container mx-auto p-4 md:p-6 text-center">
+        <h1 class="text-2xl md:text-3xl font-bold mb-4">Contact Us</h1>
+        <div class="space-y-2 mb-6">
+            <p class="text-gray-700 hover:text-gray-900 transition-colors">
+                <span class="font-semibold">Phone:</span> +91 8328350333
+            </p>
+            <p class="text-gray-700 hover:text-gray-900 transition-colors">
+                <span class="font-semibold">Email:</span> info@ekdantaauto.com
+            </p>
+            <p class="text-gray-700 hover:text-gray-900 transition-colors">
+                <span class="font-semibold">Address:</span> Tallamudunurupadu, Tadepalligudem, Andhra Pradesh 534166
+            </p>
+        </div>
+        
+        <h2 class="text-xl md:text-2xl font-semibold mt-6 mb-4">Our Location</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3819.662125467439!2d81.52500115039494!3d16.79347734731887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a37b4da7cda2dc9%3A0xbe7d1e4fc27405c!2z4LCP4LCV4LCm4LCC4LCkIOCwhuCwn-CxiyDgsJXgsKjgsY3gsLjgsLLgsY3gsJ_gsYbgsKjgsY3gsLjgsYA!5e0!3m2!1sen!2sin!4v1737093897579!5m2!1sen!2sin" 
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white p-4 text-center mt-auto">
+        <p>© 2025 Ekadanta Auto Consultancy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

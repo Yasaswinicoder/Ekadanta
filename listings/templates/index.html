@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekadanta Auto Consultancy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .navbar-heading {
+            background: linear-gradient(45deg, #1d15fa, #fa60f2, #f87171);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: blinkColors 2s infinite;
+        }
+
+        @keyframes blinkColors {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    @keyframes sparkle {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-gray-900 p-4 fixed w-full top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'home' %}" class="navbar-heading text-xl md:text-2xl font-bold">Ekadanta Auto Consultancy</a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 text-white">
+                <a href="{% url 'vehicles' %}" class="hover:text-blue-400 transition-colors">Vehicles</a>
+                <a href="{% url 'contact' %}" class="hover:text-blue-400 transition-colors">Contact Us</a>
+                <a href="{% url 'about' %}" class="hover:text-blue-400 transition-colors">About Us</a>
+                <a href="{% url 'admin_login' %}" class="btn btn-primary">Admin Login</a>
+                <a href="{% url 'admin_logout' %}" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-16 left-0 w-full bg-gray-900 p-4 md:hidden">
+            <div class="flex flex-col space-y-4 text-white">
+                <a href="{% url 'home' %}" class="hover:text-blue-400 transition-colors">Home</a>
+                <a href="{% url 'vehicles' %}" class="hover:text-blue-400 transition-colors">Vehicles</a>
+                <a href="{% url 'contact' %}" class="hover:text-blue-400 transition-colors">Contact Us</a>
+                <a href="{% url 'about' %}" class="hover:text-blue-400 transition-colors">About Us</a>
+                <a href="{% url 'admin_login' %}" class="btn btn-primary">Admin Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div 
+    class="text-white py-16 md:py-20 mt-16 bg-cover bg-center" 
+    style="background-image: url('{% static "d.jpg" %}'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
+    <div class="container mx-auto text-center px-4">
+        <!-- Icon -->
+        <img 
+            src="{% static 'icon.png' %}" 
+            alt="Icon" 
+            class="w-28 h-28 mx-auto mb-6 relative -top-14"/>
+        
+        <!-- Heading -->
+        <h1
+        class="text-3xl md:text-3xl font-bold mb-6 relative -top-20 bg-clip-text text-transparent"style="background-image: linear-gradient(to right, #000000, #2c2c2c, #434343);
+            background-size: 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: sparkle 5s linear infinite;
+            color: transparent;">
+        Ekadanta Auto Consultancy
+    </h1>
+      <!-- Tagline with Mixed Colors -->
+      <p 
+      class="text-lg md:text-xl mb-8 relative -top-24 font-semibold bg-gradient-to-r from-yellow-700 via-pink-800 to-purple-900 bg-clip-text text-transparent">
+      Ride Your Dream – Buy, Sell, and Finance With Ease!
+  </p>
+  
+
+        <!-- Call to Action Button -->
+        <a href="{% url 'vehicles' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 inline-block">
+            Explore Vehicles
+        </a>
+    </div>
+</div>
+
+    
+
+    <!-- Company Building Section -->
+    <div class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">Our Company</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="{% static 'building1.jpg' %}" alt="Building 1" class="w-full h-48 md:h-64 object-cover">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="{% static 'building2.jpg' %}" alt="Building 2" class="w-full h-48 md:h-64 object-cover">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="{% static 'owner.jpeg' %}" alt="Building 3" class="w-full h-48 md:h-64 object-cover">
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Company Building Section -->
+     <div class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="{% static 'vehicle20.jpeg' %}" alt="Building 1" class="w-full h-48 md:h-64 object-cover">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="{% static 'vehicle15.jpeg' %}" alt="Building 2" class="w-full h-48 md:h-64 object-cover">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="{% static 'vehicle5.jpg' %}" alt="Building 3" class="w-full h-48 md:h-64 object-cover">
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Customer Reviews Section -->
+<div class="py-12 md:py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">What Our Customers Say</h2>
+        <p class="text-gray-600 text-center mb-8 md:mb-12">We value our customers and their experiences with us.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- Review Cards -->
+            <div class="text-center p-4">
+                <img src="{% static 'icon.jpg' %}" alt="Satti Vasu" class="w-16 h-16 mx-auto rounded-full mb-4">
+                <p class="text-gray-600 mb-4">"Excellent service and a smooth process. Highly recommend!"</p>
+                <div class="text-yellow-400">★★★★★</div>
+                <h3 class="font-semibold text-gray-800">Satti Vasu</h3>
+            </div>
+
+            <div class="text-center p-4">
+                <img src="{% static 'icon.jpg' %}" alt="Satyanarayana" class="w-16 h-16 mx-auto rounded-full mb-4">
+                <p class="text-gray-600 mb-4 text-sm md:text-base">"Bought my first car here. The staff was friendly and guided me through every step."</p>
+                <div class="text-yellow-400">★★★★☆</div>
+                <h3 class="font-semibold text-gray-800">Satyanarayana</h3>
+                <span class="text-sm text-gray-500">Satisfied Buyer</span>
+            </div>
+
+            <div class="text-center p-4">
+                <img src="{% static 'icon.jpg' %}" alt="Rajesh Kumar" class="w-16 h-16 mx-auto rounded-full mb-4">
+                <p class="text-gray-600 mb-4 text-sm md:text-base">"Sold my bike at a great price. The team made it quick and hassle-free!"</p>
+                <div class="text-yellow-400">★★★★★</div>
+                <h3 class="font-semibold text-gray-800">Rajesh Kumar</h3>
+                <span class="text-sm text-gray-500">Repeat Customer</span>
+            </div>
+
+            <div class="text-center p-4">
+                <img src="{% static 'icon.jpg' %}" alt="Kiran" class="w-16 h-16 mx-auto rounded-full mb-4">
+                <p class="text-gray-600 mb-4 text-sm md:text-base">"Great experience with the team. Very professional and helpful throughout."</p>
+                <div class="text-yellow-400">★★★★★</div>
+                <h3 class="font-semibold text-gray-800">Kiran</h3>
+                <span class="text-sm text-gray-500">Repeat Customer</span>
+            </div>
+
+            <div class="text-center p-4">
+                <img src="{% static 'icon.jpg' %}" alt="Malli" class="w-16 h-16 mx-auto rounded-full mb-4">
+                <p class="text-gray-600 mb-4 text-sm md:text-base">"Best auto consultancy in the area. Fair prices and excellent service."</p>
+                <div class="text-yellow-400">★★★★★</div>
+                <h3 class="font-semibold text-gray-800">Malli</h3>
+                <span class="text-sm text-gray-500">Satisfied Customer</span>
+            </div>
+
+            <div class="text-center p-4">
+                <img src="{% static 'icon.jpg' %}" alt="Srikanth" class="w-16 h-16 mx-auto rounded-full mb-4">
+                <p class="text-gray-600 mb-4 text-sm md:text-base">"Transparent process and great customer service. Would recommend!"</p>
+                <div class="text-yellow-400">★★★★★</div>
+                <h3 class="font-semibold text-gray-800">Srikanth</h3>
+                <span class="text-sm text-gray-500">Valued Customer</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-4 md:py-6 text-center">
+        <div class="mb-4">
+            <a href="https://facebook.com" class="text-white mx-2 hover:text-blue-500"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" class="text-white mx-2 hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" class="text-white mx-2 hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+            <a href="https://t.me/EKADANTA_AUTO_CONSULTANCY" class="text-white mx-2 hover:text-blue-700"><i class="fab fa-telegram"></i></a>
+            <a href="https://wame.pro/1hrcbg" class="text-white mx-2 hover:text-blue-700" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i>
+            </a> 
+        </div>
+        <p class="text-sm md:text-base">© 2025 Ekadanta Auto Consultancy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

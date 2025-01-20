@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Ekdanta Auto Consultancy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .nav-links {
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: rgb(31, 41, 55);
+                padding: 1rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active a {
+                padding: 0.75rem 1rem;
+                width: 100%;
+                text-align: left;
+            }
+        
+
+        .gallery img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    
+    <nav class="bg-gray-800 text-white p-4 relative">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <a class="text-2xl font-bold" href="{% url 'home' %}">Ekdanta Auto Consultancy</a>
+                
+                <button class="mobile-menu md:hidden p-2 hover:bg-gray-700 rounded" onclick="toggleMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <div class="nav-links md:flex md:items-center md:space-x-4">
+                    <a class="block md:inline-block hover:text-gray-300 transition-colors" href="{% url 'home' %}">Home</a>
+                    <a class="block md:inline-block hover:text-gray-300 transition-colors" href="{% url 'vehicles' %}">Vehicles</a>
+                    <a class="block md:inline-block hover:text-gray-300 transition-colors" href="{% url 'contact' %}">Contact Us</a>
+                    <a class="block md:inline-block hover:text-gray-300 transition-colors" href="{% url 'about' %}">About Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-6" id="about">
+        <h1 class="text-4xl font-bold mb-6 text-gray-800">About Us</h1>
+        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+            Ekdanta Auto Consultancy is a trusted auto dealership located in Tadepalligudem, Andhra Pradesh. 
+            Our mission is to provide high-quality new and second-hand two-wheelers to our customers, ensuring 
+            the best service and value for their money.
+        </p>
+
+        <h2 class="text-3xl font-semibold mb-6 text-gray-800">Our Gallery</h2>
+        <div class="gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Replace these image paths with the correct ones -->
+            <div class="relative">
+                <img src="/static/Company.jpg" alt="Company Photo 1" class="rounded-lg w-full h-auto">
+                <div class="absolute bottom-0 bg-gray-800 bg-opacity-75 text-white text-center py-2 rounded-b-lg">
+                    Our Office
+                </div>
+            </div>
+            <div class="relative">
+                <img src="/static/building2.jpg" alt="Company Photo 4" class="rounded-lg w-full h-auto">
+                <div class="absolute bottom-0 bg-gray-800 bg-opacity-75 text-white text-center py-2 rounded-b-lg">
+                </div>
+            </div>
+            <div class="relative">
+                <img src="/static/owner1.jpeg" alt="Company Photo 5" class="rounded-lg w-full h-auto">
+                <div class="absolute bottom-0 bg-gray-800 bg-opacity-75 text-white text-center py-2 rounded-b-lg">
+                    Vehicle Stock
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white p-4 text-center mt-6">
+        <p>© 2025 Ekadanta Auto Consultancy. All rights reserved.</p>
+    </footer>
+</body>
+</html>

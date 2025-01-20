@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Image hover effects */
+        .gallery img {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            filter: brightness(90%);
+        }
+        .gallery img:hover {
+            transform: scale(1.05); /* Reduced scale for better mobile experience */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            filter: brightness(100%);
+        }
+
+        /* Hero heading fade-in animation */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile menu adjustments */
+        @media (max-width: 640px) {
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white shadow-lg p-4">
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <a href="{% url 'home' %}" class="text-2xl sm:text-3xl font-extrabold hover:text-gray-300 transition text-center sm:text-left">
+                Ekdanta Auto Consultancy
+            </a>
+            <div class="nav-buttons flex space-y-2 sm:space-y-0 sm:space-x-4">
+                <a href="{% url 'listings' %}" class="bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-md shadow-md text-sm font-medium transition w-full sm:w-auto text-center">
+                    View Vehicles
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-cover bg-center h-[16rem] sm:h-[20rem]" style="background-image: url('/static/images/hero-bg.jpg');">
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/60 to-black/90"></div>
+
+        <!-- Content -->
+        <div class="absolute inset-0 flex items-center justify-center text-center text-white px-4">
+            <div class="bg-black bg-opacity-70 p-4 sm:p-6 rounded-lg max-w-[90%] sm:max-w-[80%]">
+                <!-- Main Heading -->
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 fade-in tracking-wider">
+                    Discover Your Perfect Ride
+                </h1>
+
+                <!-- Subheading -->
+                <p class="text-sm sm:text-base md:text-lg text-gray-300 fade-in">
+                    Explore our premium collection of vehicles tailored just for you.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="container mx-auto py-8 sm:py-12 px-4">
+        <div class="gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+            {% for vehicle in vehicles %}
+            <div class="gallery-item relative group fade-in">
+                <img src="/static/{{ vehicle.image }}" alt="{{ vehicle.name }}" 
+                     class="w-full h-56 sm:h-72 object-cover rounded-lg shadow-lg">
+            </div>
+            {% empty %}
+            <div class="col-span-1 sm:col-span-2 lg:col-span-3">
+                <p class="text-center text-gray-600">No vehicles available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 sm:py-10">
+        <div class="container mx-auto text-center px-4">
+            <p class="mb-4 text-gray-400 text-sm sm:text-base">© 2025 Ekadanta Auto Consultancy. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 sm:space-x-8 text-sm sm:text-base">
+                <a href="#" class="text-pink-400 hover:text-pink-500 transition">Facebook</a>
+                <a href="#" class="text-blue-400 hover:text-blue-500 transition">Twitter</a>
+                <a href="#" class="text-red-400 hover:text-red-500 transition">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

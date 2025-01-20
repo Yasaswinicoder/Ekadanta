@@ -1,0 +1,215 @@
+{% load humanize %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ brand }} Vehicles</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      /* Base styles */
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(to right, rgb(240, 253, 244), rgb(220, 252, 231));
+      }
+
+      /* Container */
+      .container {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      /* Heading */
+      h1 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        color: rgb(31, 41, 55);
+        margin-bottom: 2rem;
+      }
+
+      /* Grid layout */
+      .vehicle-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 640px) {
+        .vehicle-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .vehicle-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Card styles */
+      .vehicle-card {
+        position: relative;
+        transform: scale(1);
+        transition: all 300ms;
+      }
+
+      .vehicle-card:hover {
+        transform: scale(1.05);
+      }
+
+      .vehicle-card:active {
+        transform: scale(1.1);
+      }
+
+      .card-inner {
+        height: 100%;
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: box-shadow 300ms;
+      }
+
+      .vehicle-card:hover .card-inner {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Image container */
+      .image-container {
+        position: relative;
+        height: 12rem;
+      }
+
+      @media (min-width: 640px) {
+        .image-container {
+          height: 13rem;
+        }
+      }
+
+      .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Card content */
+      .card-content {
+        padding: 1.5rem;
+      }
+
+      .vehicle-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: rgb(31, 41, 55);
+        margin-bottom: 0.5rem;
+      }
+
+      .vehicle-description {
+        color: rgb(75, 85, 99);
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .vehicle-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .vehicle-details span {
+        font-weight: 600;
+      }
+
+      /* Empty state */
+      .empty-state {
+        text-align: center;
+        color: rgb(75, 85, 99);
+        font-size: 1.125rem;
+        margin-top: 3rem;
+      }
+
+      /* Back button */
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 2rem;
+        padding: 0.75rem 1.5rem;
+        background-color: rgb(124, 58, 237);
+        color: white;
+        font-weight: 500;
+        border-radius: 9999px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 300ms;
+      }
+
+      .back-button:hover {
+        background-color: rgb(109, 40, 217);
+        transform: scale(1.05);
+      }
+
+      .back-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgb(124, 58, 237), 0 0 0 4px rgba(124, 58, 237, 0.1);
+      }
+
+      .back-button svg {
+        margin-right: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{ brand }} Vehicles</h1>
+
+      <div class="vehicle-grid">
+        {% for vehicle in vehicles %}
+        <div class="vehicle-card">
+          <div class="card-inner">
+            <div class="image-container">
+              <img
+                src="{{ vehicle.image.url }}"
+                alt="{{ vehicle.name }}"
+              />
+            </div>
+            <div class="card-content">
+              <h2 class="vehicle-name">{{ vehicle.name }}</h2>
+              <p class="vehicle-description">
+                {{ vehicle.description}}
+              </p>
+              <div class="vehicle-details">
+                <p><span>Mileage:</span> {{ vehicle.mileage|intcomma }} km</p>
+                <p><span>Price:</span> ₹{{ vehicle.price|intcomma }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      {% if vehicles|length == 0 %}
+      <p class="empty-state">No vehicles available for {{ brand }}.</p>
+      {% endif %}
+
+      <a href="{% url 'listings' %}" class="back-button">
+        <i data-lucide="arrow-left"></i>
+        Back to Brands
+      </a>
+    </div>
+
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
